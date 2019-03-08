@@ -1,0 +1,33 @@
+{
+	"name": "naiveable/settings-bundle",
+	"description": "System settings management.",
+	"homepage": "https://ofcold.com",
+	"type": "ofcold-bundle",
+	"support": {
+		"issues": "https://github.com/naiveable/framework/issues",
+		"source": "https://github.com/naiveable/framework"
+	},
+	"authors": [
+		{
+			"name": "Bill Li",
+			"email": "bill@ofcold.com",
+			"role": "Owner"
+		}
+	],
+	"require": {
+		"ofcold/framework": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"Naiveable\\SettingsBundle\\": "src/"
+		}
+	},
+	"require-dev": {
+		"mockery/mockery": "^1.0",
+		"phpunit/phpunit": "^7.1"
+	},
+	"config": {
+		"sort-packages": true
+	},
+	"minimum-stability": "dev"
+}
