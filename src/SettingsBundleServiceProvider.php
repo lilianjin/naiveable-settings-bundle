@@ -6,11 +6,7 @@ use Naiveable\Foundation\Ofcold;
 use Naiveable\Routing\Facades\Route;
 use Naiveable\SettingsBundle\Setting\Resources\GeneralFields;
 use Naiveable\SettingsBundle\Setting\Resources\Setting;
-use Naiveable\Support\Contracts\ConfigableProviderInterface;
-use Naiveable\Support\Contracts\ConsoleableProviderInterface;
-use Naiveable\Support\Contracts\MigrateableProviderInterface;
 use Naiveable\Support\Contracts\RouteableProviderInterface;
-use Naiveable\Support\Contracts\TranslatableProviderInterface;
 use Naiveable\Support\ServiceProvider;
 
 /**
@@ -29,11 +25,7 @@ use Naiveable\Support\ServiceProvider;
  *
  * @copyright  Copyright (c) 2017-2019 Bill Li, Ofcold Institute of Technology. All rights reserved.
  */
-class SettingsBundleServiceProvider extends ServiceProvider implements RouteableProviderInterface,
-																TranslatableProviderInterface,
-																MigrateableProviderInterface,
-																// ConsoleableProviderInterface,
-																ConfigableProviderInterface
+class SettingsBundleServiceProvider extends ServiceProvider implements RouteableProviderInterface
 {
 	/**
 	 * This namespace is applied to your controller routes.
@@ -52,6 +44,15 @@ class SettingsBundleServiceProvider extends ServiceProvider implements Routeable
 	public function register(): void
 	{
 		$this->registerBundle('naiveable.bundle.settings', __DIR__);
+
+		// Load package configuration.
+		$this->addNamespaceForConfig($this->bundle->getNamespace(), $this->bundle->getPath('resources/config'));
+
+		// Add the view namespaces.
+		$this->addNamespaceForView($this->bundle->getNamespace(), $this->bundle->getPath('resources/views'));
+
+		// Register a database migration path.
+		$this->loadMigrationsFrom($this->bundle->getPath('database/migrations'));
 	}
 
 	/**
@@ -61,6 +62,8 @@ class SettingsBundleServiceProvider extends ServiceProvider implements Routeable
 	 */
 	public function boot(): void
 	{
+		$this->translatorLoader();
+
 		$this->resources();
 
 		$this->cards();
@@ -117,49 +120,16 @@ class SettingsBundleServiceProvider extends ServiceProvider implements Routeable
 	}
 
 	/**
-	 * Register configuration namespace any bundle services.
-	 *
-	 * @return void
-	 */
-	public function configRegister(): void
-	{
-		// Load package configuration.
-		$this->addNamespaceForConfig($this->bundle->getNamespace(), $this->bundle->getPath('resources/config'));
-	}
-
-	/**
-	 * Register view namespace any bundle services.
-	 *
-	 * @return void
-	 */
-	public function viewRegister(): void
-	{
-		// Add the view namespaces.
-		$this->addNamespaceForView($this->bundle->getNamespace(), $this->bundle->getPath('resources/views'));
-	}
-
-	/**
 	 * Register translation namespace any bundle services.
 	 *
 	 * @return void
 	 */
-	public function translatorRegister(): void
+	public function translatorLoader(): void
 	{
 		$path = $this->bundle->getPath('resources/lang');
 
 		// Load package translator.
 		$this->loadTranslationsFrom($path, $this->bundle->getNamespace());
 		$this->loadJsonTranslationsFrom($path);
-	}
-
-	/**
-	 * Register a database migrate files of the service provider.
-	 *
-	 * @return void
-	 */
-	public function migrateRegister(): void
-	{
-		// Register a database migration path.
-		$this->loadMigrationsFrom($this->bundle->getPath('database/migrations'));
 	}
 }
