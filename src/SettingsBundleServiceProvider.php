@@ -2,6 +2,7 @@
 
 namespace Naiveable\SettingsBundle;
 
+use Naiveable\Foundation\Domain;
 use Naiveable\Foundation\Ofcold;
 use Naiveable\Routing\Facades\Route;
 use Naiveable\SettingsBundle\Setting\Resources\GeneralFields;
@@ -110,7 +111,7 @@ class SettingsBundleServiceProvider extends ServiceProvider implements Routeable
 	public function map()
 	{
 		Route::namespace($this->getNamespaceForApp('Admin'))
-			->domain(config('app.domain.api', null))
+			->domain(Domain::route('admin.api'))
 			->middleware('auth:api')
 			->as('naiveable.bundle.settings::api.')
 			->group(function () {
