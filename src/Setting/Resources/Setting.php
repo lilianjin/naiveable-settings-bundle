@@ -4,10 +4,9 @@ namespace Naiveable\SettingsBundle\Setting\Resources;
 
 use Naiveable\Fields\Image;
 use Naiveable\Fields\Slug;
-use Naiveable\Fields\Tabs\Tab;
+use Naiveable\Fields\Tabs;
 use Naiveable\Fields\Text;
 use Naiveable\Fields\Textarea;
-use Naiveable\Fields\Traits\Tabs as TraitsTabs;
 use Naiveable\Foundation\Resource;
 use Naiveable\Http\Request;
 use Naiveable\SettingsBundle\Setting\SettingModel;
@@ -30,8 +29,6 @@ use Naiveable\SettingsBundle\Setting\SettingModel;
  */
 class Setting extends Resource
 {
-	use TraitsTabs;
-
 	/**
 	 * The model the resource corresponds to.
 	 *
