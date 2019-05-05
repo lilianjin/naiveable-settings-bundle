@@ -72,7 +72,7 @@ class SettingController extends AdminController
 
 		$resource = $request->resource();
 
-		$resource::authorizeToCreate($request);
+		// $resource::authorizeToCreate($request);
 
 		// Set current request configuration fields.
 		$resource::setSettingFields(

@@ -2,7 +2,7 @@
 
 namespace Naiveable\SettingsBundle;
 
-use Naiveable\Foundation\Domain;
+use Naiveable\Foundation\Http\Domain;
 use Naiveable\Foundation\Ofcold;
 use Naiveable\Routing\Facades\Route;
 use Naiveable\SettingsBundle\Setting\Resources\GeneralFields;
@@ -115,8 +115,8 @@ class SettingsBundleServiceProvider extends ServiceProvider implements Routeable
 			->middleware('auth:api')
 			->as('naiveable.bundle.settings::api.')
 			->group(function () {
-				Route::get('admin/settings/{namespace?}', 'SettingController@form');
-				Route::post('admin/settings/{namespace?}', 'SettingController@store');
+				Route::get('/admin/settings/{namespace}', 'SettingController@form');
+				Route::post('/admin/settings/{namespace}', 'SettingController@store');
 			});
 	}
 
