@@ -3,7 +3,6 @@
 namespace Naiveable\SettingsBundle;
 
 use Naiveable\Foundation\Http\Domain;
-use Naiveable\Foundation\Ofcold;
 use Naiveable\Routing\Facades\Route;
 use Naiveable\SettingsBundle\Setting\Resources\GeneralFields;
 use Naiveable\SettingsBundle\Setting\Resources\Setting;
